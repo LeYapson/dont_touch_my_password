@@ -17,17 +17,7 @@ public partial class App : Application
     {
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            desktop.MainWindow = new MainWindow
-            {
-                // DataContext = new MainViewModel() // Supprimé car MainViewModel n'existe plus
-            };
-        }
-        else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
-        {
-            /*singleViewPlatform.MainView = new MainView
-            {
-                // DataContext = new MainViewModel() // Supprimé car MainViewModel n'existe plus
-            };*/
+            desktop.MainWindow = new MainWindow();
         }
 
         base.OnFrameworkInitializationCompleted();

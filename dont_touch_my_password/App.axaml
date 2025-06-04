@@ -6,5 +6,7 @@
 
     <Application.Styles>
         <FluentTheme />
+				<StyleInclude Source="avares://dont_touch_my_password/Styles/Styles1.axaml" />
+
     </Application.Styles>
 </Application>

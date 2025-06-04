@@ -1,66 +1,68 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:dont_touch_my_password.ViewModels"
+        xmlns:views="using:dont_touch_my_password.Views"
         x:Class="dont_touch_my_password.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Width="1280" Height="700"
-        Background="#5c7068"
         Title="Don't Touch My Password">
-    <Grid>
-        <!-- Navigation latérale (style NordPass) -->
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="250" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        
-        <!-- Panneau de navigation -->
-        <Border Grid.Column="0" Background="#242b28">
-            <DockPanel Margin="0,20,0,0">
-                <TextBlock DockPanel.Dock="Top" Text="Don't Touch My Password" Foreground="White" 
-                           FontSize="18" FontWeight="SemiBold" Margin="20,0,0,30" />
-                
-                <!-- Catégories (comme dans NordPass) -->
-                <StackPanel>
-                    <Button Content="Tous les mots de passe" Foreground="White" Background="Transparent" 
-                            HorizontalAlignment="Stretch" Height="45" Margin="10,5" Padding="10,0" />
-                    <Button Content="Favoris" Foreground="White" Background="Transparent"
-                            HorizontalAlignment="Stretch" Height="45" Margin="10,5" Padding="10,0" />
-                    <Button Content="Sites web" Foreground="White" Background="Transparent"
-                            HorizontalAlignment="Stretch" Height="45" Margin="10,5" Padding="10,0" />
-                    <Button Content="Applications" Foreground="White" Background="Transparent"
-                            HorizontalAlignment="Stretch" Height="45" Margin="10,5" Padding="10,0" />
-                    <Button Content="Sécurisé" Foreground="White" Background="Transparent"
-                            HorizontalAlignment="Stretch" Height="45" Margin="10,5" Padding="10,0" />
-                </StackPanel>
-            </DockPanel>
-        </Border>
-        
-        <!-- Zone principale -->
-        <Grid Grid.Column="1" Margin="30">
-            <DockPanel>
-                <!-- Barre de recherche style NordPass -->
-                <Grid DockPanel.Dock="Top">
-                    <TextBox Watermark="Rechercher..." Height="40" Margin="0,0,0,20"
-                             Background="#2D2D3F" Foreground="White" 
-                             CornerRadius="4" Padding="10" />
-                </Grid>
-                
-                <!-- Liste des mots de passe -->
-                <Grid>
-                    <DataGrid Name="PasswordsGrid" 
-                              Background="#2D2D3F" 
-                              Foreground="White"
-                              RowBackground="#2D2D3F" 
-                              GridLinesVisibility="All" 
-                              BorderThickness="0">
-                    </DataGrid>
-                    
-                    <!-- Bouton d'ajout flottant (style NordPass) -->
-                    <Button Content="+" Width="50" Height="50" CornerRadius="25"
-                            HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                            Margin="0,0,20,20" Background="#23a873" Foreground="White"
-                            FontSize="24" FontWeight="Bold" />
-                </Grid>
-            </DockPanel>
-        </Grid>
-    </Grid>
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="250" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+
+		<!-- Panneau de navigation -->
+		<Border Grid.Column="0" Classes="SidePanel">
+			<DockPanel Margin="0,20,0,0">
+				<TextBlock DockPanel.Dock="Top" Text="Don't Touch My Password" Classes="AppTitle" />
+
+				<!-- Catégories -->
+				<StackPanel Margin="0,20,0,0">
+					<Button Classes="menuItem" Command="{Binding NavigateToViewCommand}" CommandParameter="Passwords">
+						<StackPanel Orientation="Horizontal">
+							<TextBlock Text="🔑" Margin="0,0,10,0"/>
+							<TextBlock Text="Tous les mots de passe"/>
+						</StackPanel>
+					</Button>
+					<Button Classes="menuItem" Command="{Binding NavigateToViewCommand}" CommandParameter="Favorites">
+						<StackPanel Orientation="Horizontal">
+							<TextBlock Text="⭐" Margin="0,0,10,0"/>
+							<TextBlock Text="Favoris"/>
+						</StackPanel>
+					</Button>
+					<Button Classes="menuItem" Command="{Binding NavigateToViewCommand}" CommandParameter="Websites">
+						<StackPanel Orientation="Horizontal">
+							<TextBlock Text="🌐" Margin="0,0,10,0"/>
+							<TextBlock Text="Sites web"/>
+						</StackPanel>
+					</Button>
+					<Button Classes="menuItem" Command="{Binding NavigateToViewCommand}" CommandParameter="Apps">
+						<StackPanel Orientation="Horizontal">
+							<TextBlock Text="📱" Margin="0,0,10,0"/>
+							<TextBlock Text="Applications"/>
+						</StackPanel>
+					</Button>
+					<Button Classes="menuItem" Command="{Binding NavigateToViewCommand}" CommandParameter="Secure">
+						<StackPanel Orientation="Horizontal">
+							<TextBlock Text="🔒" Margin="0,0,10,0"/>
+							<TextBlock Text="Sécurisé"/>
+						</StackPanel>
+					</Button>
+					<Button Classes="menuItem" Command="{Binding NavigateToViewCommand}" CommandParameter="Trash">
+						<StackPanel Orientation="Horizontal">
+							<TextBlock Text="🗑️" Margin="0,0,10,0"/>
+							<TextBlock Text="Corbeille"/>
+						</StackPanel>
+					</Button>
+				</StackPanel>
+			</DockPanel>
+		</Border>
+
+		<!-- Zone principale avec ContentControl -->
+		<ContentControl Grid.Column="1"
+                        Content="{Binding CurrentView}"
+                        Margin="30" />
+	</Grid>
 </Window>

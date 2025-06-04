@@ -1,12 +1,10 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="dont_touch_my_password.App"
-             RequestedThemeVariant="Default">
-             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+             x:Class="dont_touch_my_password.App">
 
     <Application.Styles>
         <FluentTheme />
-				<StyleInclude Source="avares://dont_touch_my_password/Styles/Styles1.axaml" />
-
+        <StyleInclude Source="avares://dont_touch_my_password/Styles/AppStyles.axaml" />
+		<StyleInclude Source="avares://dont_touch_my_password/Styles/Styles1.axaml" />
     </Application.Styles>
 </Application>
